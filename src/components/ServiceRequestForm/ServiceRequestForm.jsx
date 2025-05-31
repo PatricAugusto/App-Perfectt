@@ -1,9 +1,8 @@
 // src/components/ServiceRequestForm/ServiceRequestForm.jsx
 import React, { useState } from 'react';
+// Não precisamos mais do './ServiceRequestForm.css' aqui, pois o Bootstrap é importado globalmente.
 
-// O componente agora recebe uma prop chamada 'onAddRequest'
-function ServiceRequestForm({ onAddRequest }) { // Desestruturamos a prop aqui
-
+function ServiceRequestForm({ onAddRequest }) {
   const [serviceType, setServiceType] = useState('');
   const [clientName, setClientName] = useState('');
   const [clientEmail, setClientEmail] = useState('');
@@ -29,16 +28,14 @@ function ServiceRequestForm({ onAddRequest }) { // Desestruturamos a prop aqui
       clientPhone,
       desiredDate,
       observations,
-      id: Date.now(), // ID único para cada solicitação
+      id: Date.now(),
       status: 'Pendente'
     };
 
-    // Chamamos a função onAddRequest que veio do componente pai (App.jsx)
     onAddRequest(requestData);
 
     alert('Sua solicitação foi enviada com sucesso! Em breve entraremos em contato e você poderá acompanhar o status no histórico.');
 
-    // Limpar o formulário após o envio
     setServiceType('');
     setClientName('');
     setClientEmail('');
@@ -47,28 +44,20 @@ function ServiceRequestForm({ onAddRequest }) { // Desestruturamos a prop aqui
     setObservations('');
   };
 
-  const formFieldStyle = {
-    width: '100%',
-    padding: '10px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    boxSizing: 'border-box'
-  };
-
   return (
-    <section style={{ padding: '20px', maxWidth: '600px', margin: '20px auto', border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
-      <h2 style={{ textAlign: 'center', color: '#333' }}>Solicitar Serviço</h2>
-      <p style={{ textAlign: 'center', marginBottom: '25px', color: '#555' }}>Preencha os dados abaixo para solicitar um de nossos serviços. Entraremos em contato o mais breve possível!</p>
+    <section className="card p-4 shadow-sm mb-4 mx-auto" style={{ maxWidth: '600px' }}> {/* Contêiner do formulário com estilos Bootstrap e largura máxima */}
+      <h2 className="card-title h3 mb-3 text-center">Solicitar Serviço</h2>
+      <p className="card-text text-muted mb-4 text-center">Preencha os dados abaixo para solicitar um de nossos serviços. Entraremos em contato o mais breve possível!</p>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        <div>
-          <label htmlFor="serviceType" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Tipo de Serviço:</label>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3"> {/* Espaçamento entre campos */}
+          <label htmlFor="serviceType" className="form-label">Tipo de Serviço:</label>
           <select
             id="serviceType"
             value={serviceType}
             onChange={(e) => setServiceType(e.target.value)}
             required
-            style={formFieldStyle}
+            className="form-select" // Removido o comentário problemático aqui
           >
             <option value="">Selecione um serviço</option>
             {availableServices.map((service, index) => (
@@ -77,80 +66,70 @@ function ServiceRequestForm({ onAddRequest }) { // Desestruturamos a prop aqui
           </select>
         </div>
 
-        <div>
-          <label htmlFor="clientName" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Seu Nome Completo:</label>
+        <div className="mb-3">
+          <label htmlFor="clientName" className="form-label">Seu Nome Completo:</label>
           <input
             type="text"
             id="clientName"
             value={clientName}
             onChange={(e) => setClientName(e.target.value)}
             required
-            style={formFieldStyle}
+            className="form-control" // Classe Bootstrap para inputs
             placeholder="Ex: João da Silva"
           />
         </div>
 
-        <div>
-          <label htmlFor="clientEmail" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Seu Email:</label>
+        <div className="mb-3">
+          <label htmlFor="clientEmail" className="form-label">Seu Email:</label>
           <input
             type="email"
             id="clientEmail"
             value={clientEmail}
             onChange={(e) => setClientEmail(e.target.value)}
             required
-            style={formFieldStyle}
+            className="form-control"
             placeholder="Ex: seu.email@empresa.com.br"
           />
         </div>
 
-        <div>
-          <label htmlFor="clientPhone" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Seu Telefone (com DDD):</label>
+        <div className="mb-3">
+          <label htmlFor="clientPhone" className="form-label">Seu Telefone (com DDD):</label>
           <input
             type="tel"
             id="clientPhone"
             value={clientPhone}
             onChange={(e) => setClientPhone(e.target.value)}
             required
-            style={formFieldStyle}
+            className="form-control"
             placeholder="Ex: (XX) 9XXXX-XXXX"
           />
         </div>
 
-        <div>
-          <label htmlFor="desiredDate" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Data Desejada para o Serviço:</label>
+        <div className="mb-3">
+          <label htmlFor="desiredDate" className="form-label">Data Desejada para o Serviço:</label>
           <input
             type="date"
             id="desiredDate"
             value={desiredDate}
             onChange={(e) => setDesiredDate(e.target.value)}
             required
-            style={formFieldStyle}
+            className="form-control"
           />
         </div>
 
-        <div>
-          <label htmlFor="observations" style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Observações (opcional):</label>
+        <div className="mb-4"> {/* Um pouco mais de espaçamento antes do botão */}
+          <label htmlFor="observations" className="form-label">Observações (opcional):</label>
           <textarea
             id="observations"
             value={observations}
             onChange={(e) => setObservations(e.target.value)}
             rows="4"
-            style={{ ...formFieldStyle, resize: 'vertical' }}
+            className="form-control"
             placeholder="Descreva detalhes adicionais ou suas necessidades específicas..."
           ></textarea>
         </div>
 
-        <button type="submit" style={{
-          padding: '12px 20px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          fontSize: '1em',
-          fontWeight: 'bold',
-          marginTop: '10px'
-        }}>
+        <button type="submit" className="btn btn-primary btn-lg w-100"> {/* Botão primário grande e com largura total */}
           Solicitar Serviço
         </button>
       </form>

@@ -1,37 +1,34 @@
 // src/components/RequestHistory/RequestHistory.jsx
 import React from 'react';
+// import './RequestHistory.css'; // REMOVA OU COMENTE esta linha
 
-// O componente agora recebe uma prop chamada 'requests'
-function RequestHistory({ requests }) { // Desestruturamos a prop aqui
+function RequestHistory({ requests }) {
   return (
-    <section style={{ padding: '20px', maxWidth: '800px', margin: '20px auto', border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
-      <h2 style={{ textAlign: 'center', color: '#333' }}>Histórico de Solicitações</h2>
-      <p style={{ textAlign: 'center', marginBottom: '25px', color: '#555' }}>Acompanhe o status das suas solicitações aqui.</p>
+    <section className="card p-4 shadow-sm mx-auto" style={{ maxWidth: '800px' }}> {/* card, p-4, shadow-sm, mx-auto, max-width */}
+      <h2 className="card-title h3 mb-3 text-center">Histórico de Solicitações</h2>
+      <p className="card-text text-muted mb-4 text-center">Acompanhe o status das suas solicitações aqui.</p>
 
-      {/* Condição para exibir mensagem se não houver solicitações */}
       {requests.length === 0 ? (
-        <p style={{ textAlign: 'center', color: '#777' }}>Você ainda não tem solicitações registradas.</p>
+        <div className="alert alert-info text-center" role="alert"> {/* alert alert-info */}
+          Você ainda não tem solicitações registradas.
+        </div>
       ) : (
-        // Se houver solicitações, vamos listá-las
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <ul className="list-group"> {/* list-group para listas Bootstrap */}
           {requests.map((request) => (
-            <li key={request.id} style={{
-              backgroundColor: 'white',
-              border: '1px solid #eee',
-              borderRadius: '5px',
-              padding: '15px',
-              marginBottom: '10px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '5px'
-            }}>
-              <p><strong>Serviço:</strong> {request.serviceType}</p>
-              <p><strong>Cliente:</strong> {request.clientName}</p>
-              <p><strong>Email:</strong> {request.clientEmail}</p>
-              <p><strong>Telefone:</strong> {request.clientPhone}</p>
-              <p><strong>Data Desejada:</strong> {request.desiredDate}</p>
-              <p><strong>Observações:</strong> {request.observations || 'N/A'}</p>
-              <p><strong>Status:</strong> <span style={{ fontWeight: 'bold', color: request.status === 'Pendente' ? '#ffc107' : '#28a745' }}>{request.status}</span></p>
+            <li key={request.id} className="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-3"> {/* list-group-item, flex classes */}
+              <div className="mb-2 mb-md-0 text-break"> {/* mb-2, mb-md-0, text-break para quebrar texto longo */}
+                <h5 className="mb-1 text-primary fw-bold">{request.serviceType}</h5> {/* text-primary, fw-bold */}
+                <p className="mb-1 text-muted">Cliente: {request.clientName}</p>
+                <p className="mb-1 text-muted">Email: {request.clientEmail}</p>
+                <p className="mb-1 text-muted">Tel: {request.clientPhone}</p>
+                <p className="mb-1 text-muted">Data Desejada: {request.desiredDate}</p>
+                <p className="mb-0 text-muted">Obs: {request.observations || 'N/A'}</p>
+              </div>
+              <div className="flex-shrink-0">
+                <span className={`badge ${request.status === 'Pendente' ? 'bg-warning text-dark' : 'bg-success'}`}> {/* badge, bg-warning/bg-success */}
+                  {request.status}
+                </span>
+              </div>
             </li>
           ))}
         </ul>

@@ -1,30 +1,36 @@
 // src/App.jsx
-import React, { useState } from 'react'; // Importamos useState aqui também
+import React, { useState } from 'react';
 import Header from './components/Header/Header';
 import ServiceList from './components/ServiceList/ServiceList';
 import ServiceRequestForm from './components/ServiceRequestForm/ServiceRequestForm';
 import RequestHistory from './components/RequestHistory/RequestHistory';
+// Não precisamos mais do './index.css' aqui, pois o Bootstrap é importado no main.jsx
+// import './index.css'; // REMOVA OU COMENTE esta linha
 
 function App() {
-  // Estado para armazenar todas as solicitações de serviço
-  // Inicialmente é um array vazio.
   const [serviceRequests, setServiceRequests] = useState([]);
+  const [activeSection, setActiveSection] = useState('request');
 
-  // Função para adicionar uma nova solicitação
   const addServiceRequest = (newRequest) => {
-    // Adiciona a nova solicitação ao array existente, mantendo as anteriores
     setServiceRequests((prevRequests) => [...prevRequests, newRequest]);
   };
 
+  const navigateTo = (section) => {
+    setActiveSection(section);
+  };
+
   return (
-    <div className="App">
-      <Header />
-      <main>
+    // Aplicando classes Bootstrap para layout básico
+    <div className="d-flex flex-column min-vh-100 bg-light"> {/* d-flex, flex-column, min-vh-100 para altura total e fundo leve */}
+      <Header onNavigate={navigateTo} activeSection={activeSection} />
+      <main className="container my-4 flex-grow-1"> {/* container, my-4 para margem vertical, flex-grow-1 para ocupar espaço */}
         <ServiceList />
-        {/* Passamos a função addServiceRequest como uma 'prop' para o formulário */}
-        <ServiceRequestForm onAddRequest={addServiceRequest} />
-        {/* Passamos a lista de serviceRequests como uma 'prop' para o histórico */}
-        <RequestHistory requests={serviceRequests} />
+        {activeSection === 'request' && (
+          <ServiceRequestForm onAddRequest={addServiceRequest} />
+        )}
+        {activeSection === 'history' && (
+          <RequestHistory requests={serviceRequests} />
+        )}
       </main>
     </div>
   );
