@@ -1,0 +1,139 @@
+/* src/index.css */
+
+/* Importa os estilos padrão do Bootstrap *ANTES* dos seus estilos personalizados */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* Importa os ícones do Bootstrap *ANTES* dos seus estilos personalizados */
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+/*
+  Definição das variáveis CSS personalizadas do Bootstrap.
+  Isso sobrescreve as cores padrão do Bootstrap.
+  A cor "primary" será o nosso dourado.
+*/
+:root {
+  --bs-primary: #DAA520; /* Dourado */
+  --bs-secondary: #adb5bd; /* Um cinza neutro, pode ser ajustado para um preto mais suave se preferir */
+  --bs-success: #28a745;   /* Mantém verde para sucesso */
+  --bs-info: #17a2b8;     /* Mantém azul claro para info */
+  --bs-warning: #FFD700;   /* Dourado para warnings/pendentes */
+  --bs-danger: #dc3545;    /* Mantém vermelho para perigo */
+  --bs-light: #f8ffef;    /* Quase branco, para fundos claros */
+  --bs-dark: #121212;     /* Um preto mais profundo para fundos escuros */
+
+  /* Cores de texto */
+  --bs-body-color: var(--bs-dark); /* Texto principal mais escuro */
+  --bs-body-bg: var(--bs-light); /* Fundo geral da página, branco/cinza claro */
+
+  /* Cores específicas da nossa paleta para uso direto */
+  --color-gold: #DAA520;
+  --color-black: #000000; /* Preto puro para fundos e textos específicos */
+  --color-white: #FFFFFF; /* Branco puro */
+}
+
+/* Estilos gerais para corpo do texto */
+body {
+  font-family: 'Montserrat', sans-serif; /* Sugestão de fonte moderna */
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+}
+
+/* Ajustes para a barra de navegação (navbar) - Fundo preto, texto branco */
+.navbar.bg-dark {
+  background-color: var(--color-black) !important; /* Força o fundo do navbar para preto puro */
+}
+
+.navbar-brand {
+  color: var(--color-white) !important; /* Marca do app sempre branca */
+}
+
+/* Ajustes para os botões de navegação no header */
+.navbar-nav .btn.btn-outline-light {
+  color: var(--color-white); /* Texto branco */
+  border-color: var(--color-white); /* Borda branca */
+  transition: all 0.3s ease; /* Transição suave para hover */
+}
+
+.navbar-nav .btn.btn-outline-light:hover,
+.navbar-nav .btn.btn-outline-light.active {
+  background-color: var(--color-gold); /* Fundo dourado no hover/ativo */
+  color: var(--color-black); /* Texto preto no hover/ativo */
+  border-color: var(--color-gold); /* Borda dourada no hover/ativo */
+}
+
+/* Títulos principais pretos */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-black); /* Títulos em preto por padrão */
+}
+
+/* Títulos e textos específicos com cor primária (dourado) */
+.text-primary {
+  color: var(--bs-primary) !important; /* Garante que o dourado seja usado para text-primary */
+}
+
+/* Fundo da página principal (main content) */
+main.container {
+  background-color: var(--bs-body-bg); /* Garante que o fundo da área de conteúdo seja o branco suave */
+}
+
+/* Cards em geral */
+.card {
+  background-color: var(--color-white); /* Fundo dos cards em branco */
+  color: var(--color-black); /* Texto dos cards em preto */
+  border-color: rgba(0, 0, 0, 0.125); /* Borda sutil */
+}
+
+/* Alertas de informação em branco (se usados) */
+.alert-info {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-color: #dee2e6;
+}
+
+/* Badges de status no histórico */
+.badge.bg-warning { /* Para status "Pendente" */
+  background-color: var(--color-gold) !important;
+  color: var(--color-black) !important;
+}
+
+.badge.bg-success { /* Para status "Concluído" */
+  background-color: var(--color-black) !important;
+  color: var(--color-white) !important;
+  border: 1px solid var(--color-white); /* Borda branca para destacar no preto */
+}
+
+/* Carrossel - legendas e botões */
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.8) !important; /* Fundo preto mais opaco */
+  color: var(--color-white) !important;
+}
+
+.carousel-caption h3 {
+  color: var(--color-gold) !important; /* Título do slide dourado */
+}
+
+.carousel-caption p {
+  color: var(--color-white) !important;
+}
+
+.carousel-caption .btn-light {
+  background-color: var(--color-gold) !important;
+  color: var(--color-black) !important;
+  border-color: var(--color-gold) !important;
+}
+
+.carousel-caption .btn-light:hover {
+  background-color: var(--color-black) !important;
+  color: var(--color-gold) !important;
+  border-color: var(--color-gold) !important;
+}
+
+/* Rodapé - Fundo preto, texto branco */
+footer.bg-dark {
+  background-color: var(--color-black) !important; /* Força o fundo do footer para preto puro */
+  color: var(--color-white) !important;
+}
+
+footer a {
+  color: var(--color-gold) !important; /* Links do rodapé em dourado */
+}

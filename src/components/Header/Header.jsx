@@ -1,27 +1,76 @@
 // src/components/Header/Header.jsx
 import React from 'react';
-// import './Header.css'; // REMOVA OU COMENTE esta linha
 
 function Header({ onNavigate, activeSection }) {
   return (
-    <header className="bg-dark text-white text-center py-4 shadow-sm"> {/* bg-dark, text-white, text-center, py-4, shadow-sm */}
-      <h1 className="display-4 fw-bold mb-2">Seu Negócio de Merchandising e Terceirização</h1> {/* display-4, fw-bold */}
-      <p className="lead opacity-75">Soluções inteligentes para o seu negócio!</p> {/* lead, opacity-75 */}
-      <nav className="mt-4">
+    // Usa 'bg-dark' para o fundo preto do navbar
+    <header className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+      <div className="container">
+        {/* A marca do app pode ser branca */}
+        <a className="navbar-brand fs-4 fw-bold text-white" href="#home" onClick={() => onNavigate('home')}>
+          App Perfectt
+        </a>
         <button
-          onClick={() => onNavigate('request')}
-          // Aplicação de classes Bootstrap para botões e estado ativo
-          className={`btn btn-primary mx-1 ${activeSection === 'request' ? 'active' : ''}`}
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          Solicitar Serviço
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <button
-          onClick={() => onNavigate('history')}
-          className={`btn btn-primary mx-1 ${activeSection === 'history' ? 'active' : ''}`}
-        >
-          Histórico de Solicitações
-        </button>
-      </nav>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto gap-2">
+            <li className="nav-item">
+              <button
+                className={`btn btn-outline-light ${activeSection === 'home' ? 'active' : ''}`}
+                onClick={() => onNavigate('home')}
+                type="button"
+              >
+                Início
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className={`btn btn-outline-light ${activeSection === 'request' ? 'active' : ''}`}
+                onClick={() => onNavigate('request')}
+                type="button"
+              >
+                Solicitar Serviço
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className={`btn btn-outline-light ${activeSection === 'history' ? 'active' : ''}`}
+                onClick={() => onNavigate('history')}
+                type="button"
+              >
+                Histórico de Solicitações
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className={`btn btn-outline-light ${activeSection === 'gallery' ? 'active' : ''}`}
+                onClick={() => onNavigate('gallery')}
+                type="button"
+              >
+                Nossos Trabalhos
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className={`btn btn-outline-light ${activeSection === 'contact' ? 'active' : ''}`}
+                onClick={() => onNavigate('contact')}
+                type="button"
+              >
+                Contato
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
     </header>
   );
 }
